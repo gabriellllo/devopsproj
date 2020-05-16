@@ -2,30 +2,15 @@
 
 ## Project Overview
 
-In this project, you will apply the skills you have acquired in this course to operationalize a Machine Learning Microservice API. 
+In this project it is demonstrated how to operationalize a Machine Learning Microservice API. 
 
-You are given a pre-trained, `sklearn` model that has been trained to predict housing prices in Boston according to several features, such as average rooms in a home and data about highway access, teacher-to-pupil ratios, and so on. You can read more about the data, which was initially taken from Kaggle, on [the data source site](https://www.kaggle.com/c/boston-housing). This project tests your ability to operationalize a Python flask app—in a provided file, `app.py`—that serves out predictions (inference) about housing prices through API calls. This project could be extended to any pre-trained machine learning model, such as those for image recognition and data labeling.
+We start from a pre-trained, `sklearn` model that has been trained to predict housing prices in Boston according to several features. More info about the data, which was initially taken from Kaggle, can be found on [the data source site](https://www.kaggle.com/c/boston-housing). 
 
-### Project Tasks
-
-Your project goal is to operationalize this working, machine learning microservice using [kubernetes](https://kubernetes.io/), which is an open-source system for automating the management of containerized applications. In this project you will:
-* Test your project code using linting
-* Complete a Dockerfile to containerize this application
-* Deploy your containerized application using Docker and make a prediction
-* Improve the log statements in the source code for this application
-* Configure Kubernetes and create a Kubernetes cluster
-* Deploy a container using Kubernetes and make a prediction
-* Upload a complete Github repo with CircleCI to indicate that your code has been tested
-
-You can find a detailed [project rubric, here](https://review.udacity.com/#!/rubrics/2576/view).
-
-**The final implementation of the project will showcase your abilities to operationalize production microservices.**
-
----
+The predictions of the model are served through a Python flask app implemented in the file `app.py`, that responds to API calls. This project could be extended to any pre-trained machine learning model, such as those for image recognition and data labeling.
 
 ## Setup the Environment
 
-* Create a virtualenv and activate it
+* Create a virtualenv and activate it, i.e. `python3 -m venv ~/.devops && source ~/.devops/bin/activate`
 * Run `make install` to install the necessary dependencies
 
 ### Running `app.py`
@@ -34,9 +19,17 @@ You can find a detailed [project rubric, here](https://review.udacity.com/#!/rub
 2. Run in Docker:  `./run_docker.sh`
 3. Run in Kubernetes:  `./run_kubernetes.sh`
 
-### Kubernetes Steps
+### Files in the repository
 
-* Setup and Configure Docker locally
-* Setup and Configure Kubernetes locally
-* Create Flask app in Container
-* Run via kubectl
+* the directory `.circleci` contains the configuration file for the continuous integration service CircleCI
+* the directory `modeldata` contains the pretrained model and the input data used to train it in `csv` format
+* the directory `output_txt_files` contains the output of the commands used when running the application in Docker or in Kubernetes
+* `app.py` is the python Flask application
+* `Dockerfile` contains the configuration to containerize the application
+* `make_predictions.sh` is a bash script that makes call to the local API to test it
+* `Makefile` is used to install dependencies of the project and lint the `Dockerfile` and the `app.py` file
+* `README.md` is this readme file
+* `requirements.txt` contains the required additional libraries for Python
+* `run_docker.sh` is a bash script to build and execute the app locally in a Docker container
+* `run_kubernetes.sh` is a bash script to execute the containerized app on a Kubernetes cluster
+* `upload_docker.sh` is a bash script used to upload the containerized app on Docker Hub
